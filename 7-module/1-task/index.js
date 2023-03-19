@@ -73,11 +73,19 @@ export default class RibbonMenu {
     const isArrowRight = !!event.target.closest('.ribbon__arrow_right')
     const isArrowLeft = !!event.target.closest('.ribbon__arrow_left')
     if (isArrowRight) {
-      this.ribbonInner.scrollBy(350, 0)
+      this.next()
     }
     if (isArrowLeft) {
-      this.ribbonInner.scrollBy(-350, 0)
+      this.previous()
     }
+  }
+
+  next() {
+    this.ribbonInner.scrollBy(350, 0)
+  }
+
+  previous() {
+    this.ribbonInner.scrollBy(-350, 0)
   }
 
   showActiveItem = (event) => {
