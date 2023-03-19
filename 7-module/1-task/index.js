@@ -49,17 +49,16 @@ export default class RibbonMenu {
     const scrollLeft = this.ribbonInner.scrollLeft;
     const scrollRight = this.getScrollRight()
 
-    if (!scrollLeft) {
-      this.arrowLeft.classList.remove('ribbon__arrow_visible')
-    } else {
-      this.arrowLeft.classList.add('ribbon__arrow_visible')
-    }
-    
-    if (scrollRight < 1) {
-      this.arrowRight.classList.remove('ribbon__arrow_visible')
-    } else {
-      this.arrowRight.classList.add('ribbon__arrow_visible')
-    }
+    this.checkArrow(this.arrowLeft, scrollLeft)
+    this.checkArrow(this.arrowRight, scrollRight)
+  }
+
+  checkArrow = (arrow, scroll) => {
+    if (scroll < 1) {
+        arrow.classList.remove('ribbon__arrow_visible')
+      } else {
+        arrow.classList.add('ribbon__arrow_visible')
+      }
   }
 
   getScrollRight() {
