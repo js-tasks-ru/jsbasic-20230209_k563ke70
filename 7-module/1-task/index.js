@@ -84,13 +84,17 @@ export default class RibbonMenu {
     const isItemMenu = !!event.target.closest('.ribbon__item')
     if(isItemMenu) {
       event.preventDefault()
-      const allItems = this.elem.querySelectorAll('.ribbon__item')
-      allItems.forEach(item => {
-        item.classList.remove('ribbon__item_active')
-      })
+      this.removeClassActive()
       event.target.classList.add('ribbon__item_active')
       this.setCustomEvent(event)
     }
+  }
+
+  removeClassActive() {
+    const allItems = this.elem.querySelectorAll('.ribbon__item')
+    allItems.forEach(item => {
+      item.classList.remove('ribbon__item_active')
+    })
   }
 
   setCustomEvent = (event) => {
