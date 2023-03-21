@@ -75,7 +75,7 @@ export default class StepSlider {
     steps.forEach(item => {
       item.classList.remove('slider__step-active')
     })
-    for( let i = 0; i < this.value; i++) {
+    for( let i = 0; i <= this.value; i++) {
       steps[i].classList.add('slider__step-active')
     }
   }
