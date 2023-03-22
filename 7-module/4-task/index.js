@@ -150,8 +150,6 @@ export default class StepSlider {
       const parts = Math.round(sectionEnd / stepWidth)
       step = (this.steps - 1) - parts
 
-      this.value = event.clientX < data.left ? 0 : this.steps - 1
-      
       return step
   }
 }
