@@ -41,7 +41,7 @@ export default class CartIcon {
 
   setTop() {
     const dataCart = this.elem.getBoundingClientRect()
-    this.top = dataCart.top + window.pageYOffset
+    this.top = dataCart.top + document.documentElement.pageYOffset
   }
 
   getleftIndent() {
@@ -66,7 +66,7 @@ export default class CartIcon {
     const leftIndent = this.getleftIndent()
     const isMobile = document.documentElement.clientWidth <= 767
 
-    if(this.elem.offsetWidth || window.pageYOffset > this.top && !isMobile){
+    if(this.elem.offsetWidth || document.documentElement.pageYOffset > this.top && !isMobile){
       Object.assign(this.elem.style, {
         position: 'fixed',
         top: '50px',
