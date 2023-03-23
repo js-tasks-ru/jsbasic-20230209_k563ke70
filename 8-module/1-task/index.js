@@ -49,10 +49,10 @@ export default class CartIcon {
     const firstChild = container.firstElementChild
     const dataElem = this.elem.getBoundingClientRect()
     const dataContainer = container.getBoundingClientRect()
-    const dataFirstChild = firstChild.getBoundingClientRect()
     const isWidth = document.documentElement.clientWidth > dataContainer.right + dataElem.width + 20
     let leftIndent 
-    if (isWidth) {
+    if (isWidth && firstChild) {
+      const dataFirstChild = firstChild.getBoundingClientRect()
       leftIndent = dataFirstChild.right  + 20
     } else {
       leftIndent = document.documentElement.clientWidth - dataElem.width - 10
@@ -66,7 +66,7 @@ export default class CartIcon {
     const leftIndent = this.getleftIndent()
     const isMobile = document.documentElement.clientWidth <= 767
 
-    if(this.elem.offsetWidth || document.documentElement.pageYOffset > this.top && !isMobile){
+    if(this.elem.offsetWidth || window.pageYOffset > this.top && !isMobile){
       Object.assign(this.elem.style, {
         position: 'fixed',
         top: '50px',
