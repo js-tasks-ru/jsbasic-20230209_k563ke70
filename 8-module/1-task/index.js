@@ -45,12 +45,15 @@ export default class CartIcon {
   }
 
   getleftIndent() {
-    const container = document.body.querySelector('.container')
     const firstChild = document.body.querySelector('.container:first-child')
+    const container = document.body.querySelector('.container')
     const dataElem = this.elem.getBoundingClientRect()
-    const dataContainer = container.getBoundingClientRect()
-    const isWidth = document.documentElement.clientWidth > dataContainer.right + dataElem.width + 20
     let leftIndent 
+    let isWidth
+    if (container) {
+      const dataContainer = container.getBoundingClientRect()
+      isWidth = document.documentElement.clientWidth > dataContainer.right + dataElem.width + 20
+    }
     if (isWidth && firstChild) {
       const dataFirstChild = firstChild.getBoundingClientRect()
       leftIndent = dataFirstChild.right  + 20
