@@ -9,6 +9,7 @@ export default class CartIcon {
 
   render() {
     this.elem = createElement('<div class="cart-icon"></div>');
+    this.setTop()
   }
 
   update(cart) {
@@ -38,7 +39,48 @@ export default class CartIcon {
     window.addEventListener('resize', () => this.updatePosition());
   }
 
+  setTop() {
+    const dataCart = this.elem.getBoundingClientRect()
+    this.top = dataCart.top + window.pageYOffset
+  }
+
+  getleftIndent() {
+    const container = document.body.querySelector('.container')
+    const firstChild = container.firstElementChild
+    const dataElem = this.elem.getBoundingClientRect()
+    const dataContainer = container.getBoundingClientRect()
+    const dataFirstChild = firstChild.getBoundingClientRect()
+    const isWidth = document.documentElement.clientWidth >= dataContainer.right + dataElem.width + 20
+    let leftIndent 
+    if (isWidth) {
+      leftIndent = dataFirstChild.right  + 20
+    } else {
+      leftIndent = document.documentElement.clientWidth - dataElem.width - 10
+    }
+
+    return leftIndent
+  }
+
   updatePosition() {
-    // ваш код ...
+    const leftIndent = this.getleftIndent()
+    const isMobile = document.documentElement.clientWidth <= 767
+
+    if(this.elem.offsetWidth || window.pageYOffset > this.top && !isMobile){
+      Object.assign(this.elem.style, {
+        position: 'fixed',
+        top: '50px',
+        zIndex: 1e3,
+        right: '10px',
+        left: `${leftIndent}px`
+      })
+    } else {
+      Object.assign(this.elem.style, {
+        position: '',
+        top: '',
+        left: '',
+        right: '',
+        zIndex: ''
+      });
+    }
   }
 }
