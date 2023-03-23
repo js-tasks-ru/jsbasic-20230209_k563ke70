@@ -50,7 +50,7 @@ export default class CartIcon {
     const dataElem = this.elem.getBoundingClientRect()
     const dataContainer = container.getBoundingClientRect()
     const dataFirstChild = firstChild.getBoundingClientRect()
-    const isWidth = document.documentElement.clientWidth >= dataContainer.right + dataElem.width + 20
+    const isWidth = document.documentElement.clientWidth > dataContainer.right + dataElem.width + 20
     let leftIndent 
     if (isWidth) {
       leftIndent = dataFirstChild.right  + 20
