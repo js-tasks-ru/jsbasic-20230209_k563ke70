@@ -9,7 +9,7 @@ export default class CartIcon {
 
   render() {
     this.elem = createElement('<div class="cart-icon"></div>');
-    this.setTop()
+    
   }
 
   update(cart) {
@@ -62,6 +62,7 @@ export default class CartIcon {
   }
 
   updatePosition() {
+    this.setTop()
     const leftIndent = this.getleftIndent()
     const isMobile = document.documentElement.clientWidth <= 767
 
