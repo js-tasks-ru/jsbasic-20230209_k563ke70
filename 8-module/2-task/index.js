@@ -23,29 +23,27 @@ export default class ProductGrid {
   }
 
   updateFilter = (filters) => {
-    this.filters = Object.assign(this.filters, filters)
     
-    let result = Array.from(this.products)
+    this.filters  = Object.assign(this.filters, filters)
     
-    for (let [key, value]  of Object.entries(this.filters)) {
-      
-      if (key === 'noNuts' && value) {
-        result = result.filter(item => !item['nuts'])
-      }
+    let result = [...this.products]
 
-      if ( key === 'vegeterianOnly' && value) {
-        result = result.filter(item => item['name'].includes('veg') || item['vegeterian'])
-      }
-
-      if (key === 'maxSpiciness' && value < 3) {
-          result = result.filter(item => item['spiciness'] < 3)
-      }
-
-      if (key === 'category' && value) {
-        result = result.filter(item => item['category'] === 'soups')
-      }
+    if (this.filters['noNuts']){
+      result = result.filter(item => !item['nuts'])
     }
-    console.log(result);
+
+    if (this.filters['vegeterianOnly']){
+      result = result.filter(item => item['name'].includes('veg') || item['vegeterian'])
+    }
+
+    if (this.filters['maxSpiciness']) {
+      result = result.filter(item => item['spiciness'] <= this.filters['maxSpiciness'])
+    }
+
+    if (this.filters['category']) {
+      result = result.filter(item => item['category'] === this.filters['category'])
+    }
+
     const container = document.querySelector('#container')
     
     if (container) {
