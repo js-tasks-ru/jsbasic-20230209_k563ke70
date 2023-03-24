@@ -36,7 +36,7 @@ export default class ProductGrid {
       result = result.filter(item => item['name'].includes('veg') || item['vegeterian'])
     }
 
-    if (this.filters['maxSpiciness']) {
+    if (this.filters['maxSpiciness'] >= 0) {
       result = result.filter(item => item['spiciness'] <= this.filters['maxSpiciness'])
     }
 
