@@ -8,7 +8,7 @@ export default class Cart {
   addProduct(product) {
     if (!product) {return}
 
-    const index = this.cartItems.findIndex(item => item.product.id === product.id)
+    const index = this.cartItems.findIndex(item => item.product === product)
     if(index !== -1) {
       this.cartItems[index].count++
       this.onProductUpdate(this.cartItems[index])
