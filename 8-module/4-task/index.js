@@ -6,6 +6,7 @@ import Modal from '../../7-module/2-task/index.js';
 export default class Cart {
   cartItems = []; // [product: {...}, count: N]
 
+
   constructor(cartIcon) {
     this.cartIcon = cartIcon;
     this.addEventListeners();
