@@ -6,9 +6,10 @@ import Modal from '../../7-module/2-task/index.js';
 export default class Cart {
   cartItems = []; // [product: {...}, count: N]
 
-
   constructor(cartIcon) {
     this.cartIcon = cartIcon;
+    // console.log('this.cartIcon: ', this.cartIcon);
+
     this.addEventListeners();
   }
 
@@ -117,24 +118,27 @@ export default class Cart {
     innerCart.append(this.renderOrderForm())
   
     this.modal.setBody(innerCart)
-    this.modal.open()
     this.modal.setTitle('Your order')
+    this.modal.open()
 
     const modalBody = document.querySelector('.modal__body')
+    // this.cartProduct = document.querySelector('.product-cart')
     modalBody.innerHTML = innerCart.outerHTML
     this.modalBody = document.querySelector('.modal__body > div')
+    // this.modalBody.addEventListener('click', this.changeCount)
     this.modalBody.onclick = this.changeCount
     this.modalBody.querySelector('form').onsubmit = this.onSubmit
   }
 
   changeCount = ({target}) => {
+    console.log(this.modalBody);
     const isProduct = target.closest('.cart-product')
     if(isProduct) {
       const id = getId(target)
       const amount = getAmount(target)
       this.updateProductCount(id, amount)
     }
-
+      
     function getAmount(target){
       let amount = 0
       const isPlus = target.closest('.cart-counter__button_plus')
@@ -191,23 +195,26 @@ export default class Cart {
     let form = this.modalBody.querySelector('.cart-form')
     let formData = new FormData(form)
 
-    fetch('https://httpbin.org/post', {method: 'POST', body: formData})
-      .then(response => {
-        if (response.status === 200) {
-          this.modal.setTitle('Success!')
-          this.cartItems.splice(0)
-          this.cartIcon.elem.innerHTML = ''
-          this.modalBody.outerHTML = `
-            <div class="modal__body-inner">
-              <p>
-                Order successful! Your order is being cooked :) <br>
-                We’ll notify you about delivery time shortly.<br>
-                <img src="/assets/images/delivery.gif">
-              </p>
-            </div>`
-        }
-      })
-  }
+    fetch('https://httpbin.org/post', {
+      method: 'POST',
+      body: formData
+    }).then(response => {
+      console.log(response.status);
+      if (response.status === 200) {
+        this.modal.setTitle('Success!')
+        this.cartItems.splice(0)
+        this.cartIcon.elem.innerHTML = ''
+        this.modalBody.outerHTML = `
+          <div class="modal__body-inner">
+            <p>
+              Order successful! Your order is being cooked :) <br>
+              We’ll notify you about delivery time shortly.<br>
+              <img src="/assets/images/delivery.gif">
+            </p>
+          </div>`
+      }
+    })
+  };
 
   addEventListeners() {
     this.cartIcon.elem.onclick = () => this.renderModal();
