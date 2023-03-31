@@ -8,8 +8,6 @@ export default class Cart {
 
   constructor(cartIcon) {
     this.cartIcon = cartIcon;
-    // console.log('this.cartIcon: ', this.cartIcon);
-
     this.addEventListeners();
   }
 
@@ -122,16 +120,13 @@ export default class Cart {
     this.modal.open()
 
     const modalBody = document.querySelector('.modal__body')
-    // this.cartProduct = document.querySelector('.product-cart')
     modalBody.innerHTML = innerCart.outerHTML
     this.modalBody = document.querySelector('.modal__body > div')
-    // this.modalBody.addEventListener('click', this.changeCount)
     this.modalBody.onclick = this.changeCount
     this.modalBody.querySelector('form').onsubmit = this.onSubmit
   }
 
   changeCount = ({target}) => {
-    console.log(this.modalBody);
     const isProduct = target.closest('.cart-product')
     if(isProduct) {
       const id = getId(target)
